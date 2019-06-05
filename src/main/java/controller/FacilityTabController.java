@@ -21,7 +21,7 @@ public class FacilityTabController implements Initializable {
     private TextField facilityNameTextField;
 
     @FXML
-    private TextField facilityMinAgeTextField; //TODO
+    private TextField facilityMinAgeTextField;
 
     @FXML
     private TableView<Facility> facilityTableView;

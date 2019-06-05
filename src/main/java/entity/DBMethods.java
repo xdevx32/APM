@@ -39,7 +39,7 @@ public class DBMethods {
         return facilityID;
     }
 
-    /* Method to RETURN a facility in the database */
+    /* Method to RETURN a facility from the database */
     public static Facility getFacility(Integer facilityID) {
         Session session = sessionFactory.openSession();
         Transaction tx = null;
@@ -61,9 +61,11 @@ public class DBMethods {
     }
 
 
-    /* Method to  LIST all the facilities */
+    /* Method to LIST all the facilities */
 
     // This is not even used!??!?!?!?
+    // TODO
+    // CONSIDER REMOVING or something
     public static void listFacilities() {
         Session session = sessionFactory.openSession();
         Transaction tx = null;
@@ -135,7 +137,6 @@ public class DBMethods {
         try {
             tx = session.beginTransaction();
             Manager manager = (Manager) session.get(Manager.class, managerId);
-            //ObservableList<Facility> facilityObservableList = FXCollections.observableArrayList(facility);
             tx.commit();
             return manager;
         } catch (HibernateException e) {
@@ -173,9 +174,6 @@ public class DBMethods {
         }
     }
 
-    // GET ALL METHODS
-
-
     /* Method to RETURN all facilities */
     public static ObservableList<Facility> getFacilities() {
         Session session = sessionFactory.openSession();
@@ -198,7 +196,7 @@ public class DBMethods {
         return null;
     }
 
-
+    /* Method to RETURN all managers */
     public static ObservableList<Manager> getManagers() {
         Session session = sessionFactory.openSession();
         Transaction tx = null;

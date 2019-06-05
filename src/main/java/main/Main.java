@@ -1,6 +1,5 @@
 package main;
 
-import entity.Facility;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,7 +10,7 @@ import java.util.Objects;
 
 /**
  *
- * @author Kostadinova
+ * @author Kukushev
  */
 public class Main extends Application {
 
