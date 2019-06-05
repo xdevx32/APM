@@ -23,6 +23,11 @@
                         <fx:include fx:id="facilityTab" source="FacilitiesTab.fxml" />
                     </content>
                 </Tab>
+                <Tab text="Деца">
+                    <content>
+                        <fx:include fx:id="KidTab" source="KidsTab.fxml" />
+                    </content>
+                </Tab>
             </tabs>
         </TabPane>
     </children>
