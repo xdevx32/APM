@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="450.0" stylesheets="@BootstrapTheme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LandingPageController">
+    <children>
+        <TabPane layoutX="-6.0" layoutY="-5.0" prefHeight="580.0" prefWidth="456.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Увеселителни паркове">
+                    <content>
+                        <!--<fx:include fx:id="ParkTab" source="ParksTab.fxml" />-->
+                    </content>
+                </Tab>
+                <Tab text="Мениджъри">
+                    <content>
+                        <fx:include fx:id="ManagerTab" source="ManagersTab.fxml" />
+                    </content>
+                </Tab>
+                <Tab text="Съоражения">
+                    <content>
+                        <fx:include fx:id="facilityTab" source="FacilitiesTab.fxml" />
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>
