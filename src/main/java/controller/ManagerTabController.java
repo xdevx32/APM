@@ -38,7 +38,7 @@ public class ManagerTabController implements Initializable {
         if (selectedObject != null) {
             System.out.println(selectedObject.getIdManager());
             managerTableView.getItems().removeAll(selectedObject);
-            DBMethods.deleteFacility(selectedObject.getIdManager());
+            DBMethods.deleteManager(selectedObject.getIdManager());
         }
     }
 

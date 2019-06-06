@@ -17,6 +17,7 @@ public class DBMethods {
 
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
+    /* FACILITY */
     /* Method to CREATE a facility in the database */
     public static Integer addFacility(String name, Integer minAge) {
         Session session = sessionFactory.openSession();
@@ -39,6 +40,7 @@ public class DBMethods {
         return facilityID;
     }
 
+    /* FACILITY */
     /* Method to RETURN a facility from the database */
     public static Facility getFacility(Integer facilityID) {
         Session session = sessionFactory.openSession();
@@ -60,12 +62,8 @@ public class DBMethods {
         return null;
     }
 
-
+    /* FACILITY */
     /* Method to LIST all the facilities */
-
-    // This is not even used!??!?!?!?
-    // TODO
-    // CONSIDER REMOVING or something
     public static void listFacilities() {
         Session session = sessionFactory.openSession();
         Transaction tx = null;
@@ -88,7 +86,8 @@ public class DBMethods {
         }
     }
 
-    /* Method to delete a facility by id */
+    /* FACILITY */
+    /* Method to DELETE a facility by id */
     public static void deleteFacility(Integer idFacility) {
         Session session = sessionFactory.openSession();
         Transaction tx = null;
@@ -108,72 +107,7 @@ public class DBMethods {
         }
     }
 
-    public static Integer addManager(String managerName, Double managerSalary) {
-        Session session = sessionFactory.openSession();
-        Transaction tx = null;
-        Integer managerID = null;
-
-        try {
-            tx = session.beginTransaction();
-            Manager manager = new Manager(managerName, managerSalary);
-            managerID = (Integer) session.save(manager);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        return managerID;
-
-    }
-
-    public static Manager getManager(Integer managerId) {
-        Session session = sessionFactory.openSession();
-        Transaction tx = null;
-
-        try {
-            tx = session.beginTransaction();
-            Manager manager = (Manager) session.get(Manager.class, managerId);
-            tx.commit();
-            return manager;
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        return null;
-
-    }
-
-    // This is not even used ?!??!!
-    public static void listManagers() {
-        Session session = sessionFactory.openSession();
-        Transaction tx = null;
-
-        try {
-            tx = session.beginTransaction();
-            List managers = session.createQuery("FROM " + Manager.class.getName()).list();
-            for (Iterator iterator = managers.iterator(); iterator.hasNext();) {
-                Manager manager = (Manager) iterator.next();
-                System.out.println(" Name: " + manager.getName() + "Salary: " + manager.getSalary());
-            }
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }
-
+    /* FACILITY */
     /* Method to RETURN all facilities */
     public static ObservableList<Facility> getFacilities() {
         Session session = sessionFactory.openSession();
@@ -196,6 +130,54 @@ public class DBMethods {
         return null;
     }
 
+    /* MANAGER */
+    /* Method to CREATE a manager in the database */
+    public static Integer addManager(String managerName, Double managerSalary) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        Integer managerID = null;
+
+        try {
+            tx = session.beginTransaction();
+            Manager manager = new Manager(managerName, managerSalary);
+            managerID = (Integer) session.save(manager);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return managerID;
+
+    }
+
+    /* MANAGER */
+    /* Method to RETURN a manager from the database */
+    public static Manager getManager(Integer managerId) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            Manager manager = (Manager) session.get(Manager.class, managerId);
+            tx.commit();
+            return manager;
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+
+    }
+
+    /* MANAGER */
     /* Method to RETURN all managers */
     public static ObservableList<Manager> getManagers() {
         Session session = sessionFactory.openSession();
@@ -216,5 +198,211 @@ public class DBMethods {
             session.close();
         }
         return null;
+    }
+
+    /* MANAGER */
+    /* Method to LIST all the managers */
+    public static void listManagers() {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            List managers = session.createQuery("FROM " + Manager.class.getName()).list();
+            for (Iterator iterator = managers.iterator(); iterator.hasNext();) {
+                Manager manager = (Manager) iterator.next();
+                System.out.println(" Name: " + manager.getName() + "Salary: " + manager.getSalary());
+            }
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    /* PARK */
+    /* Method to CREATE a park in the database */
+    public static Integer addPark(String name, Double entryTicketPrice) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        Integer parkID = null;
+
+        try {
+            tx = session.beginTransaction();
+            Park park = new Park(name,entryTicketPrice);
+            parkID = (Integer) session.save(park);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return parkID;
+    }
+
+    /* PARK */
+    /* Method to RETURN a park from the database */
+    public static Park getPark(Integer parkID) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            Park park = (Park) session.get(Park.class, parkID);
+            tx.commit();
+            return park;
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+
+    /* PARK */
+    /* Method to DELETE a park by id */
+    public static void deletePark(Integer idPark) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            Park park = (Park) session.get(Park.class, idPark);
+            session.delete(park);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    /* PARK */
+    /* Method to RETURN all parks */
+    public static ObservableList<Park> getParks() {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            List parks = session.createQuery("FROM " + Park.class.getSimpleName()).list();
+            ObservableList<Park> parkObservableList = FXCollections.observableArrayList(parks);
+            tx.commit();
+            return parkObservableList;
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+
+    /* KID */
+    /* Method to CREATE a kid in the database */
+    public static Integer addKid(Integer age) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        Integer kidID = null;
+
+        try {
+            tx = session.beginTransaction();
+            Kid kid = new Kid(age);
+            kidID = (Integer) session.save(kid);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return kidID;
+    }
+
+    /* KID */
+    /* Method to RETURN a kid from the database */
+    public static Kid getKid(Integer kidID) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            Kid kid = (Kid) session.get(Kid.class, kidID);
+            tx.commit();
+            return kid;
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+
+    /* KID */
+    /* Method to DELETE a kid by id */
+    public static void deleteKid(Integer idKid) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            Kid kid = (Kid) session.get(Kid.class, idKid);
+            session.delete(kid);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    /* KID */
+    /* Method to RETURN all kids */
+    public static ObservableList<Kid> getKids() {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            List kids = session.createQuery("FROM " + Kid.class.getSimpleName()).list();
+            ObservableList<Kid> kidObservableList = FXCollections.observableArrayList(kids);
+            tx.commit();
+            return kidObservableList;
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+
+
+    public static void deleteManager(Integer idManager) {
     }
 }

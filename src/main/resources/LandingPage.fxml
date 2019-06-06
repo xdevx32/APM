@@ -4,13 +4,13 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="450.0" stylesheets="@BootstrapTheme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LandingPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="450.0" stylesheets="@BootstrapTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LandingPageController">
     <children>
-        <TabPane layoutX="-6.0" layoutY="-5.0" prefHeight="580.0" prefWidth="456.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane layoutX="-6.0" layoutY="-5.0" prefHeight="580.0" prefWidth="456.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-5.0">
             <tabs>
                 <Tab text="Увеселителни паркове">
                     <content>
-                        <!--<fx:include fx:id="ParkTab" source="ParksTab.fxml" />-->
+                        <fx:include fx:id="ParkTab" source="ParksTab.fxml" />
                     </content>
                 </Tab>
                 <Tab text="Мениджъри">
@@ -20,12 +20,17 @@
                 </Tab>
                 <Tab text="Съоражения">
                     <content>
-                        <fx:include fx:id="facilityTab" source="FacilitiesTab.fxml" />
+                        <fx:include fx:id="FacilityTab" source="FacilitiesTab.fxml" />
                     </content>
                 </Tab>
                 <Tab text="Деца">
                     <content>
                         <fx:include fx:id="KidTab" source="KidsTab.fxml" />
+                    </content>
+                </Tab>
+                <Tab text="Справки">
+                    <content>
+                        <fx:include fx:id="ReportTab" source="ReportTab.fxml" />
                     </content>
                 </Tab>
             </tabs>

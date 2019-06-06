@@ -52,7 +52,6 @@ public class FacilityTabController implements Initializable {
         }
     }
 
-
     @FXML
     public void deleteFacilityData(ActionEvent actionEvent) {
         Facility selectedObject = facilityTableView.getSelectionModel().getSelectedItem();
