@@ -8,6 +8,11 @@
     <children>
         <TabPane layoutX="-6.0" layoutY="-5.0" prefHeight="580.0" prefWidth="456.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-5.0">
             <tabs>
+                <Tab text="Съоражения в паркове">
+                    <content>
+                        <fx:include fx:id="ParkFacilitiesTab" source="ParkFacilitiesTab.fxml" />
+                    </content>
+                </Tab>
                 <Tab text="Увеселителни паркове">
                     <content>
                         <fx:include fx:id="ParkTab" source="ParksTab.fxml" />

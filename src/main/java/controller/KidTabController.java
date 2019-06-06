@@ -2,7 +2,6 @@ package controller;
 
 import entity.DBMethods;
 import entity.Kid;
-import entity.Manager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

@@ -1,9 +1,6 @@
 package controller;
 
-import entity.DBMethods;
-import entity.Facility;
-import entity.Manager;
-import entity.Park;
+import entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,37 +35,10 @@ public class ParkTabController implements Initializable {
     @FXML
     private TextField entryTicketPriceTextField;
 
-    @FXML
-    void deleteParkData(ActionEvent event) {
 
-    }
-
-    @FXML
-    void saveParkData(ActionEvent event) {
-        /* //TODO
-        if ((parkNameTextField.getText() != null && !parkNameTextField.getText().isEmpty())
-                && (entryTicketPriceTextField.getText() != null && !entryTicketPriceTextField.getText().isEmpty())) {
-            String parkName = parkNameTextField.getText();
-            Double entryTicketPrice = Double.parseDouble(entryTicketPriceTextField.getText());
-            ArrayList<Facility> facilities = new ArrayList<Facility>(); // TODO CHECK HOW IT WORKS
-            Manager manager = new Manager(1, "Шефчето",3000.0);
-
-            int parkId = DBMethods.addPark(parkName, entryTicketPrice, manager,facilities);
-            Park parkObject = DBMethods.getPark(parkId);
-
-            parkTableView.getItems().add(parkObject);
-            parkNameTextField.clear();
-            entryTicketPriceTextField.clear();
-        } else {
-            // TODO
-            System.out.println("Error message for not entering data");
-        }
-        */
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        /*
         final ObservableList<Park> parkData = FXCollections.observableArrayList(DBMethods.getParks());
 
         parkNameColumn.setCellValueFactory(
@@ -78,7 +48,37 @@ public class ParkTabController implements Initializable {
 
         parkTableView.setItems(parkData);
 
-         */
+    }
+
+    @FXML
+    void saveParkData(ActionEvent event) {
+        if ((parkNameTextField.getText() != null && !parkNameTextField.getText().isEmpty())
+                && (entryTicketPriceTextField.getText() != null && !entryTicketPriceTextField.getText().isEmpty())) {
+            String parkName = parkNameTextField.getText();
+            Double entryTicketPrice = Double.parseDouble(entryTicketPriceTextField.getText());
+            //ArrayList<Facility> facilities = new ArrayList<Facility>(); // TODO CHECK HOW IT WORKS
+            //Manager manager = new Manager(1, "Шефчето",3000.0);
+
+            Integer parkId = DBMethods.addPark(parkName, entryTicketPrice);
+            Park parkObject = DBMethods.getPark(parkId);
+
+            parkTableView.getItems().add(parkObject);
+            parkNameTextField.clear();
+            entryTicketPriceTextField.clear();
+        } else {
+            // TODO
+            System.out.println("Error message for not entering data");
+        }
+    }
+
+    @FXML
+    void deleteParkData(ActionEvent event) {
+        Park selectedObject = parkTableView.getSelectionModel().getSelectedItem();
+        if (selectedObject != null) {
+            System.out.println(selectedObject.getIdPark());
+            parkTableView.getItems().removeAll(selectedObject);
+            DBMethods.deletePark(selectedObject.getIdPark());
+        }
     }
 }
 
