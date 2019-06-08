@@ -4,9 +4,9 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="450.0" stylesheets="@BootstrapTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LandingPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="700.0" stylesheets="@BootstrapTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LandingPageController">
     <children>
-        <TabPane layoutX="-6.0" layoutY="-5.0" prefHeight="580.0" prefWidth="456.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-5.0">
+        <TabPane layoutX="-6.0" layoutY="-5.0" prefHeight="580.0" prefWidth="450.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-5.0">
             <tabs>
                 <Tab text="Съоражения в паркове">
                     <content>

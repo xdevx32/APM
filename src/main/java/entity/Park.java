@@ -9,7 +9,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "park")
-public class Park implements java.io.Serializable {
+public class Park implements Comparable {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "idPark", unique = true, nullable = false)
@@ -24,19 +24,42 @@ public class Park implements java.io.Serializable {
     @OneToOne(mappedBy = "park")
     private Manager manager;
 
-    @OneToMany(mappedBy = "park")
-    private Set<Facility> facilities = new TreeSet();
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "park_facility",
+            joinColumns = { @JoinColumn(name = "idPark") }
+    )
+    private Set<Facility> facilities = new TreeSet<>();
+
+    public Park(String name, Double entryTicketPrice, TreeSet<Facility> facilities) {
+        this.name = name;
+        this.entryTicketPrice = entryTicketPrice;
+        this.facilities = facilities;
+    }
 
     Park(){
         this.name = "Park Name Not Set";
     }
 
+    public Park(String name, Double entryTicketPrice, Manager manager, Set<Facility> facilities) {
+        this.name = name;
+        this.entryTicketPrice = entryTicketPrice;
+        this.manager = manager;
+        this.facilities = facilities;
+    }
+
+    public Park(String name, Double entryTicketPrice, Manager manager, TreeSet<Facility> facilities) {
+        this.name = name;
+        this.entryTicketPrice = entryTicketPrice;
+        this.manager = manager;
+        this.facilities = facilities;
+    }
+
     public Park(String name, Double entryTicketPrice) {
-        this.idPark = idPark;
+        //this.idPark = idPark;
         this.name = name;
         this.entryTicketPrice = entryTicketPrice;
     }
-
 
     public Integer getIdPark() {
         return idPark;
@@ -70,12 +93,25 @@ public class Park implements java.io.Serializable {
         this.manager = manager;
     }
 
+    public void setFacilities(TreeSet<Facility> facilities) {
+        this.facilities = facilities;
+    }
+
+    public void setSingleFacility(Facility facility) {
+        this.facilities.add(facility);
+    }
+
     public Set<Facility> getFacilities() {
         return facilities;
     }
 
     public void setFacilities(Set<Facility> facilities) {
         this.facilities = facilities;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 
     /*

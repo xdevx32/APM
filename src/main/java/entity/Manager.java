@@ -6,8 +6,11 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "manager")
-public class Manager implements java.io.Serializable {
+public class Manager implements Comparable {
 
+
+    // Check this for salary
+    // https://www.baeldung.com/hibernate-dynamic-mapping
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "idManager", unique = true, nullable = false)
@@ -59,5 +62,10 @@ public class Manager implements java.io.Serializable {
 
     public void setSalary(Double salary) {
         this.salary = salary;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 }

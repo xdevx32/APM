@@ -7,7 +7,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReportTabController">
    <children>
-      <FlowPane prefHeight="345.0" prefWidth="379.0">
+      <FlowPane prefHeight="345.0" prefWidth="700.0">
          <children>
             <Button mnemonicParsing="false" text="reports" />
          </children>

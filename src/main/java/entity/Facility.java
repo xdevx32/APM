@@ -2,11 +2,14 @@ package entity;
 
 import javax.persistence.*;
 
+import java.util.Set;
+import java.util.TreeSet;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "facility")
-public class Facility implements java.io.Serializable {
+public class Facility implements Comparable {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "idFacility", unique = true, nullable = false)
@@ -18,15 +21,17 @@ public class Facility implements java.io.Serializable {
     @Column(name = "minAge")
     private Integer minAge;
 
-    @OneToOne
-    private Park park;
+    @ManyToMany()
+    private Set<Park> parks = new TreeSet<>();
 
     Facility() {
         this.name = "Facility name not entered";
     }
 
-    public Facility(String name) {
+    public Facility(String name, Integer minAge, Set<Park> parks) {
         this.name = name;
+        this.minAge = minAge;
+        this.parks = parks;
     }
 
     public Facility(String name, Integer minAge) {
@@ -34,42 +39,41 @@ public class Facility implements java.io.Serializable {
         this.minAge = minAge;
     }
 
-    public Facility(Integer idFacility, String name, Integer minAge) {
-        this.idFacility = idFacility;
-        this.name = name;
-        this.minAge = minAge;
-    }
-
-    public Park getPark() {
-        return park;
-    }
-
-    public void setPark(Park park) {
-        this.park = park;
-    }
-
-
-    public Integer getIdFacility() {
-        return idFacility;
-    }
 
     public void setIdFacility(Integer idFacility) {
         this.idFacility = idFacility;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public void setMinAge(Integer minAge) {
+        this.minAge = minAge;
+    }
+
+    public void setParks(Set<Park> parks) {
+        this.parks = parks;
+    }
+
+    public Integer getIdFacility() {
+        return idFacility;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public Integer getMinAge() {
         return minAge;
     }
 
-    public void setMinAge(Integer minAge) {
-        this.minAge = minAge;
+    public Set<Park> getParks() {
+        return parks;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 }
