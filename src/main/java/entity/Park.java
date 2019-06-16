@@ -10,46 +10,76 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name = "park")
 public class Park implements java.io.Serializable {
+
+    private Integer idPark;
+
+    private String name;
+
+    private Double entryTicketPrice;
+
+    private Manager manager;
+
+    private Set<Facility> facilities = new TreeSet<>();
+
+
+
+    // Getters with annotations
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "idPark", unique = true, nullable = false)
-    private Integer idPark;
+    public Integer getIdPark() {
+        return idPark;
+    }
 
     @Column(name = "name", length = 25)
-    private String name;
+    public String getName() {
+        return name;
+    }
 
     @Column(name = "entryTicketPrice")
-    private Double entryTicketPrice;
+    public Double getEntryTicketPrice() {
+        return entryTicketPrice;
+    }
 
     @OneToOne(mappedBy = "park")
-    private Manager manager;
-
-    //@ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    @ManyToMany(mappedBy = "park", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Facility> facilities = new TreeSet<>();
-
-    public Park(String name, Double entryTicketPrice, TreeSet<Facility> facilities) {
-        this.name = name;
-        this.entryTicketPrice = entryTicketPrice;
-        this.facilities = facilities;
+    public Manager getManager() {
+        return manager;
     }
 
-    Park(){
-        this.name = "Park Name Not Set";
+    @ManyToMany(mappedBy = "parks", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    public Set<Facility> getFacilities() {
+        //TODO Check which is correct
+        //return facilities;
+        return new TreeSet<Facility>(this.facilities);
     }
 
-    public Park(String name, Double entryTicketPrice, Manager manager, Set<Facility> facilities) {
+    // Setters
+
+    public void setIdPark(Integer idPark) {
+        this.idPark = idPark;
+    }
+
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public void setEntryTicketPrice(Double entryTicketPrice) {
         this.entryTicketPrice = entryTicketPrice;
+    }
+
+    public void setManager(Manager manager) {
         this.manager = manager;
-        this.facilities = facilities;
     }
 
-    public Park(String name, Double entryTicketPrice, Manager manager, TreeSet<Facility> facilities) {
-        this.name = name;
-        this.entryTicketPrice = entryTicketPrice;
-        this.manager = manager;
+    public void setFacilities(Set<Facility> facilities) {
         this.facilities = facilities;
+
+    }
+
+    // Constructors
+
+    public Park() {
+        this.name = "Park name not set";
     }
 
     public Park(String name, Double entryTicketPrice) {
@@ -58,55 +88,29 @@ public class Park implements java.io.Serializable {
         this.entryTicketPrice = entryTicketPrice;
     }
 
-    public Integer getIdPark() {
-        return idPark;
-    }
-
-    public void setIdPark(Integer idPark) {
+    public Park(String name, Double entryTicketPrice, Manager manager, Set<Facility> facilities) {
         this.idPark = idPark;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
-    }
-
-    public Double getEntryTicketPrice() {
-        return entryTicketPrice;
-    }
-
-    public void setEntryTicketPrice(Double entryTicketPrice) {
         this.entryTicketPrice = entryTicketPrice;
-    }
-
-    public Manager getManager() {
-        return manager;
-    }
-
-    public void setManager(Manager manager) {
         this.manager = manager;
-    }
-
-    public void setFacilities(TreeSet<Facility> facilities) {
         this.facilities = facilities;
     }
+
+    public Park(Integer idPark, String name, Double entryTicketPrice, Manager manager, Set<Facility> facilities) {
+        this.idPark = idPark;
+        this.name = name;
+        this.entryTicketPrice = entryTicketPrice;
+        this.manager = manager;
+        this.facilities = facilities;
+    }
+
+    // Additional
 
     public void setSingleFacility(Facility facility) {
         this.facilities.add(facility);
     }
 
-    public Set<Facility> getFacilities() {
-        return new TreeSet<Facility>(this.facilities);
-    }
-
-    public void setFacilities(Set<Facility> facilities) {
-        this.facilities = facilities;
-    }
-
-
+    //TODO
     @Override
     public String toString() {
         //return "Park{" + "idPark=" + idPark + ", name=" + name + ", entryTicketPrice=" + entryTicketPrice +'}';

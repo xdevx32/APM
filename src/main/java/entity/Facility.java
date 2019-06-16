@@ -11,38 +11,42 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Table(name = "facility")
 public class Facility implements java.io.Serializable {
 
+    // Properties
+
+    private Integer idFacility;
+
+    private String name;
+
+    private Integer minAge;
+
+    private Set<Park> parks = new TreeSet<>();
+
+
+    // Getters with annotations
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "idFacility", unique = true, nullable = false)
-    private Integer idFacility;
+    public Integer getIdFacility() {
+        return idFacility;
+    }
 
     @Column(name = "name", length = 25)
-    private String name;
+    public String getName() {
+        return name;
+    }
 
     @Column(name = "minAge")
-    private Integer minAge;
-
-
-    //@ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    @ManyToMany//(mappedBy = "facilities")
-    private Set<Park> parks = new TreeSet<>();
-
-    Facility() {
-        this.name = "Facility name not entered";
+    public Integer getMinAge() {
+        return minAge;
     }
 
-    public Facility(String name, Integer minAge, Set<Park> parks) {
-        this.name = name;
-        this.minAge = minAge;
-        this.parks = parks;
+    @ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    public Set<Park> getParks() {
+        return parks;
     }
 
-    public Facility(String name, Integer minAge) {
-        this.idFacility = idFacility;
-        this.name = name;
-        this.minAge = minAge;
-    }
-
+    // Setters
 
     public void setIdFacility(Integer idFacility) {
         this.idFacility = idFacility;
@@ -60,22 +64,27 @@ public class Facility implements java.io.Serializable {
         this.parks = parks;
     }
 
-    public Integer getIdFacility() {
-        return idFacility;
+    // Constructors
+
+    Facility() {
+        this.idFacility = idFacility;
+        this.name = "Facility name not entered";
     }
 
-    public String getName() {
-        return name;
+    public Facility(String name, Integer minAge, Set<Park> parks) {
+        this.idFacility = idFacility;
+        this.name = name;
+        this.minAge = minAge;
+        this.parks = parks;
     }
 
-    public Integer getMinAge() {
-        return minAge;
+    public Facility(String name, Integer minAge) {
+        this.idFacility = idFacility;
+        this.name = name;
+        this.minAge = minAge;
     }
 
-    public Set<Park> getParks() {
-        return parks;
-    }
-
+    //TODO
     @Override
     public String toString() {
         return name;

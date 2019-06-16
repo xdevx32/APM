@@ -7,28 +7,69 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Table(name = "manager")
 public class Manager implements java.io.Serializable {
 
+    // Properties
+
+    private Integer idManager;
+
+    private String name;
+
+    private Double salary;
+
+    private Park park;
+
+    // Getters with annotations
 
     // Check this for salary
     // https://www.baeldung.com/hibernate-dynamic-mapping
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "idManager", unique = true, nullable = false)
-    private Integer idManager;
+    public Integer getIdManager() {
+        return idManager;
+    }
 
     @Column(name = "name", length = 45)
-    private String name;
+    public String getName() {
+        return name;
+    }
 
     @Column(name = "salary")
-    private Double salary;
+    public Double getSalary() {
+        return salary;
+    }
 
     @OneToOne
-    private Park park;
+    public Park getPark() {
+        return park;
+    }
+
+    // Setters
+
+    public void setIdManager(Integer idManager) {
+        this.idManager = idManager;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
+
+    public void setPark(Park park) {
+        this.park = park;
+    }
+
+    // Constructors
 
     Manager() {
+        this.idManager = idManager;
         this.name = "Manager name not set";
     }
 
     public Manager(String name, Double salary) {
+        this.idManager = idManager;
         this.name = name;
         this.salary = salary;
     }
@@ -39,27 +80,9 @@ public class Manager implements java.io.Serializable {
         this.salary = salary;
     }
 
-    public Integer getIdManager() {
-        return idManager;
-    }
-
-    public void setIdManager(Integer idManager) {
-        this.idManager = idManager;
-    }
-
-    public String getName() {
+    //TODO
+    @Override
+    public String toString() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Double getSalary() {
-        return salary;
-    }
-
-    public void setSalary(Double salary) {
-        this.salary = salary;
     }
 }

@@ -6,21 +6,37 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "kid")
-
 public class Kid implements java.io.Serializable {
+
+    // Properties
+
+    private Integer idKid;
+
+    private Integer age;
+
+
+    // Getters with annotations
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "idKid", unique = true, nullable = false)
-    private Integer idKid;
+    public Integer getIdKid() {
+        return idKid;
+    }
 
     @Column(name = "age")
-    private Integer age;
+    public Integer getAge() {
+        return age;
+    }
+
+    // Constructors
 
     Kid() {
 
     }
+
     public Kid(Integer age) {
+        this.idKid = idKid;
         this.age = age;
     }
 
@@ -29,20 +45,18 @@ public class Kid implements java.io.Serializable {
         this.age = age;
     }
 
-    public Integer getIdKid() {
-        return idKid;
-    }
-
     public void setIdKid(Integer idKid) {
         this.idKid = idKid;
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
     public void setAge(Integer age) {
+        this.idKid = idKid;
         this.age = age;
     }
 
+    //TODO
+    @Override
+    public String toString() {
+        return "Kid";
+    }
 }

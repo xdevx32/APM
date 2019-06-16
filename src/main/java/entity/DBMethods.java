@@ -218,15 +218,15 @@ public class DBMethods {
 
     // Status: Rework
     /* PARK */
-    /* Method to CREATE a park WITH FACILITIES in the database */
-    public static Integer addPark(String name, Double entryTicketPrice, TreeSet<Facility> facilities) {
+    /* Method to CREATE a park WITH FACILITIES AND MANAGER in the database */
+    public static Integer addPark(String name, Double entryTicketPrice, Manager manager, TreeSet<Facility> facilities) {
         Session session = sessionFactory.openSession();
         Transaction tx = null;
         Integer parkID = null;
 
         try {
             tx = session.beginTransaction();
-            Park park = new Park(name, entryTicketPrice,facilities);
+            Park park = new Park(name, entryTicketPrice, manager, facilities);
             parkID = (Integer) session.save(park);
             tx.commit();
         } catch (HibernateException e) {
