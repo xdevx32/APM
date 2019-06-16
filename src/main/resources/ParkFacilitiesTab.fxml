@@ -36,6 +36,9 @@
                <String fx:value="Съоражение 3" />
             </ListView>
          </bottom>
+         <top>
+            <Button mnemonicParsing="false" onAction="#addFacilityToSelectedPark" text="Add Facilities To Selected Park" BorderPane.alignment="CENTER" />
+         </top>
       </BorderPane>
       <FlowPane layoutX="18.0" layoutY="570.0" prefHeight="44.0" prefWidth="633.0">
          <children>

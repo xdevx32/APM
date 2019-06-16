@@ -9,7 +9,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "park")
-public class Park implements Comparable {
+public class Park implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "idPark", unique = true, nullable = false)
@@ -24,11 +24,8 @@ public class Park implements Comparable {
     @OneToOne(mappedBy = "park")
     private Manager manager;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "park_facility",
-            joinColumns = { @JoinColumn(name = "idPark") }
-    )
+    //@ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "park", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Facility> facilities = new TreeSet<>();
 
     public Park(String name, Double entryTicketPrice, TreeSet<Facility> facilities) {
@@ -56,7 +53,7 @@ public class Park implements Comparable {
     }
 
     public Park(String name, Double entryTicketPrice) {
-        //this.idPark = idPark;
+        this.idPark = idPark;
         this.name = name;
         this.entryTicketPrice = entryTicketPrice;
     }
@@ -102,24 +99,20 @@ public class Park implements Comparable {
     }
 
     public Set<Facility> getFacilities() {
-        return facilities;
+        return new TreeSet<Facility>(this.facilities);
     }
 
     public void setFacilities(Set<Facility> facilities) {
         this.facilities = facilities;
     }
 
-    @Override
-    public int compareTo(Object o) {
-        return 0;
-    }
 
-    /*
-    // TODO when ready with all entities
     @Override
     public String toString() {
-        return "Sporttype{" + "idSportType=" + idSportType + ", name=" + name + ", numberOfTitulars=" + numberOfTitulars + '}';
+        //return "Park{" + "idPark=" + idPark + ", name=" + name + ", entryTicketPrice=" + entryTicketPrice +'}';
+        return name;
     }
 
-     */
+
+
 }

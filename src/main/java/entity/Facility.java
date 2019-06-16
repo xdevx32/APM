@@ -9,7 +9,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "facility")
-public class Facility implements Comparable {
+public class Facility implements java.io.Serializable {
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "idFacility", unique = true, nullable = false)
@@ -21,7 +22,9 @@ public class Facility implements Comparable {
     @Column(name = "minAge")
     private Integer minAge;
 
-    @ManyToMany()
+
+    //@ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany//(mappedBy = "facilities")
     private Set<Park> parks = new TreeSet<>();
 
     Facility() {
@@ -35,6 +38,7 @@ public class Facility implements Comparable {
     }
 
     public Facility(String name, Integer minAge) {
+        this.idFacility = idFacility;
         this.name = name;
         this.minAge = minAge;
     }
@@ -73,7 +77,8 @@ public class Facility implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        return 0;
+    public String toString() {
+        return name;
     }
+
 }

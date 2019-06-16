@@ -22,6 +22,18 @@ public class ParkFacilitiesTabController implements Initializable {
     @FXML
     private ListView<String> selectedParkFacilitiesListView;
 
+    @FXML
+    void addFacilityToSelectedPark(ActionEvent event) {
+        Park selectedPark = parkComboBox.getValue();
+
+        // Hardcode adding facility object to park
+        Integer facilityID = DBMethods.addFacility("Gondola",13);
+        Facility facilityObject = DBMethods.getFacility(facilityID);
+        DBMethods.addFacilityForSpecificPark(selectedPark,facilityObject);
+        //
+
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -30,22 +42,17 @@ public class ParkFacilitiesTabController implements Initializable {
         parkComboBox.getItems().clear();
 
         parkComboBox.getItems().addAll(parks);
-
-
     }
 
     public void displayFacilitiesForSelectedPark(ActionEvent actionEvent) {
         Park selectedPark = parkComboBox.getValue();
 
-        ArrayList<String> facilityNames= new ArrayList<>();
-
-        for (Facility facility : selectedPark.getFacilities()) {
-            facilityNames.add(facility.getName());
-        }
-
+        final ObservableList<Facility> facilitiesForSelectedPark = DBMethods.getFacilitiesForSpecificPark(selectedPark);
+        //DBMethods.listFacilitiesForSelectedPark(selectedPark);
 
         selectedParkFacilitiesListView.getItems().clear();
 
-        selectedParkFacilitiesListView.getItems().addAll(facilityNames);
+        selectedParkFacilitiesListView.getItems().addAll(String.valueOf(facilitiesForSelectedPark));
     }
 }
+

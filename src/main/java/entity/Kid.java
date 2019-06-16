@@ -7,7 +7,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name = "kid")
 
-public class Kid implements Comparable {
+public class Kid implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -45,8 +45,4 @@ public class Kid implements Comparable {
         this.age = age;
     }
 
-    @Override
-    public int compareTo(Object o) {
-        return 0;
-    }
 }

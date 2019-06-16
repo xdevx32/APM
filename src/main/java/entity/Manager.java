@@ -1,12 +1,11 @@
 package entity;
 
 import javax.persistence.*;
-
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "manager")
-public class Manager implements Comparable {
+public class Manager implements java.io.Serializable {
 
 
     // Check this for salary
@@ -62,10 +61,5 @@ public class Manager implements Comparable {
 
     public void setSalary(Double salary) {
         this.salary = salary;
-    }
-
-    @Override
-    public int compareTo(Object o) {
-        return 0;
     }
 }
