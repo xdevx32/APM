@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.*;
 
@@ -27,7 +29,7 @@ public class ParkFacilitiesTabController implements Initializable {
         Park selectedPark = parkComboBox.getValue();
 
         // Hardcode adding facility object to park
-        Integer facilityID = DBMethods.addFacility("Gondola",13);
+        Integer facilityID = DBMethods.addFacility("Kulata",18);
         Facility facilityObject = DBMethods.getFacility(facilityID);
         DBMethods.addFacilityForSpecificPark(selectedPark,facilityObject);
         //
@@ -48,11 +50,18 @@ public class ParkFacilitiesTabController implements Initializable {
         Park selectedPark = parkComboBox.getValue();
 
         final ObservableList<Facility> facilitiesForSelectedPark = DBMethods.getFacilitiesForSpecificPark(selectedPark);
-        //DBMethods.listFacilitiesForSelectedPark(selectedPark);
+
+        // TODO ............................ Get these values..............................
 
         selectedParkFacilitiesListView.getItems().clear();
 
-        selectedParkFacilitiesListView.getItems().addAll(String.valueOf(facilitiesForSelectedPark));
+        List<String> facilityNames = new ArrayList<String>();
+
+        for (Facility facility : facilitiesForSelectedPark) {
+            facilityNames.add(facility.getName());
+        }
+
+        selectedParkFacilitiesListView.getItems().addAll(facilityNames);
     }
 }
 

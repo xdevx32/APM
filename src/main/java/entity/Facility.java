@@ -2,8 +2,8 @@ package entity;
 
 import javax.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -19,7 +19,7 @@ public class Facility implements java.io.Serializable {
 
     private Integer minAge;
 
-    private Set<Park> parks = new TreeSet<>();
+    private Set<Park> parks = new HashSet<>();
 
 
     // Getters with annotations
@@ -41,7 +41,7 @@ public class Facility implements java.io.Serializable {
         return minAge;
     }
 
-    @ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     public Set<Park> getParks() {
         return parks;
     }
@@ -87,7 +87,7 @@ public class Facility implements java.io.Serializable {
     //TODO
     @Override
     public String toString() {
-        return name;
+        return this.name;
     }
 
 }

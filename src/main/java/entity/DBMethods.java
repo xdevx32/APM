@@ -41,7 +41,7 @@ public class DBMethods {
         return facilityID;
     }
 
-    // Status: Ready
+    // Status: Not ready
     /* FACILITY */
     /* Method to ADD a facility to a PARK */
     public static void addFacilityForSpecificPark(Park park, Facility facility) {
@@ -88,7 +88,7 @@ public class DBMethods {
         return null;
     }
 
-    // Status: In progress
+    // Status: Check if needed. If not - remove.
     /* FACILITY */
     /* Method to LIST all the facilities */
     public static void listFacilitiesForSelectedPark(Park park) {
@@ -165,8 +165,8 @@ public class DBMethods {
         return null;
     }
 
-    // Status: To be removed
-    /* FACILITY */ //TODO AFTER ADD METHOD
+    // Status: Ready
+    /* FACILITY */
     /* Method to RETURN all facilities FOR A SPECIFIC PARK*/
     public static ObservableList<Facility> getFacilitiesForSpecificPark(Park park) {
         Session session = sessionFactory.openSession();
@@ -175,9 +175,10 @@ public class DBMethods {
         try {
             tx = session.beginTransaction();
 
-            // Modify to get the list of facilities in selected park.
-            // Query or method.
-            List facilities = session.createQuery("FROM " + Facility.class.getSimpleName() + "").list();
+            List facilities = session.createQuery("select p.facilities from Park p where p.idPark=:idPark")
+                    .setParameter("idPark", park.getIdPark())
+                    .list();
+
             ObservableList<Facility> facilityObservableList = FXCollections.observableArrayList(facilities);
             tx.commit();
             return facilityObservableList;
@@ -219,7 +220,7 @@ public class DBMethods {
     // Status: Rework
     /* PARK */
     /* Method to CREATE a park WITH FACILITIES AND MANAGER in the database */
-    public static Integer addPark(String name, Double entryTicketPrice, Manager manager, TreeSet<Facility> facilities) {
+    public static Integer addPark(String name, Double entryTicketPrice, Manager manager, HashSet<Facility> facilities) {
         Session session = sessionFactory.openSession();
         Transaction tx = null;
         Integer parkID = null;
@@ -500,7 +501,7 @@ public class DBMethods {
         }
     }
 
-    // Status: To be done
+    // Status: //TODO
     /* MANAGER */
     public static void deleteManager(Integer idManager) {
     }

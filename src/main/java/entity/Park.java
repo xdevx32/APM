@@ -3,7 +3,7 @@ package entity;
 import javax.persistence.*;
 
 import java.util.Set;
-import java.util.TreeSet;
+import java.util.HashSet;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -19,7 +19,7 @@ public class Park implements java.io.Serializable {
 
     private Manager manager;
 
-    private Set<Facility> facilities = new TreeSet<>();
+    private Set<Facility> facilities = new HashSet<>();
 
 
 
@@ -46,11 +46,11 @@ public class Park implements java.io.Serializable {
         return manager;
     }
 
-    @ManyToMany(mappedBy = "parks", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     public Set<Facility> getFacilities() {
         //TODO Check which is correct
-        //return facilities;
-        return new TreeSet<Facility>(this.facilities);
+        return facilities;
+        //return new HashSet<Facility>(this.facilities);
     }
 
     // Setters
