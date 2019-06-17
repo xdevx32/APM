@@ -41,7 +41,7 @@ public class Park implements java.io.Serializable {
         return entryTicketPrice;
     }
 
-    @OneToOne(mappedBy = "park")
+    @OneToOne
     public Manager getManager() {
         return manager;
     }

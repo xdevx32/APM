@@ -11,7 +11,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 
-import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.*;
 
@@ -24,22 +23,10 @@ public class ParkFacilitiesTabController implements Initializable {
     @FXML
     private ListView<String> selectedParkFacilitiesListView;
 
-    @FXML
-    void addFacilityToSelectedPark(ActionEvent event) {
-        Park selectedPark = parkComboBox.getValue();
-
-        // Hardcode adding facility object to park
-        Integer facilityID = DBMethods.addFacility("Kulata",18);
-        Facility facilityObject = DBMethods.getFacility(facilityID);
-        DBMethods.addFacilityForSpecificPark(selectedPark,facilityObject);
-        //
-
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        final ObservableList<Park> parks = FXCollections.observableArrayList(DBMethods.getParks());
+        ObservableList<Park> parks = FXCollections.observableArrayList(DBMethods.getParks());
 
         parkComboBox.getItems().clear();
 
@@ -49,9 +36,7 @@ public class ParkFacilitiesTabController implements Initializable {
     public void displayFacilitiesForSelectedPark(ActionEvent actionEvent) {
         Park selectedPark = parkComboBox.getValue();
 
-        final ObservableList<Facility> facilitiesForSelectedPark = DBMethods.getFacilitiesForSpecificPark(selectedPark);
-
-        // TODO ............................ Get these values..............................
+        ObservableList<Facility> facilitiesForSelectedPark = DBMethods.getFacilitiesForSpecificPark(selectedPark);
 
         selectedParkFacilitiesListView.getItems().clear();
 
@@ -62,6 +47,16 @@ public class ParkFacilitiesTabController implements Initializable {
         }
 
         selectedParkFacilitiesListView.getItems().addAll(facilityNames);
+    }
+
+    @FXML
+    void refreshDataAction(ActionEvent event) {
+
+        ObservableList<Park> parks = FXCollections.observableArrayList(DBMethods.getParks());
+
+        parkComboBox.getItems().clear();
+
+        parkComboBox.getItems().addAll(parks);
     }
 }
 

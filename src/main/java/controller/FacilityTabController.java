@@ -2,11 +2,13 @@ package controller;
 
 import entity.DBMethods;
 import entity.Facility;
+import entity.Park;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -31,6 +33,9 @@ public class FacilityTabController implements Initializable {
 
     @FXML
     private TableColumn facilityMinAgeColumn;
+
+    @FXML
+    private ComboBox<Park> selectParkComboBox;
 
     @FXML
     private void saveFacilityData(ActionEvent event) {
@@ -62,6 +67,15 @@ public class FacilityTabController implements Initializable {
         }
     }
 
+    @FXML
+    void addFacilityToSelectedPark(ActionEvent event) {
+        Park selectedPark = selectParkComboBox.getValue();
+
+        Facility facility = facilityTableView.getSelectionModel().getSelectedItem();
+
+        DBMethods.addFacilityForSpecificPark(selectedPark.getIdPark(), facility);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -73,6 +87,10 @@ public class FacilityTabController implements Initializable {
                 new PropertyValueFactory<>("minAge"));
 
         facilityTableView.setItems(facilityData);
+
+        ObservableList<Park> parkData = FXCollections.observableArrayList(DBMethods.getParks());
+
+        selectParkComboBox.setItems(parkData);
     }
 
 }

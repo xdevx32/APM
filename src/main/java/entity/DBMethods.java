@@ -41,18 +41,20 @@ public class DBMethods {
         return facilityID;
     }
 
-    // Status: Not ready
+    // Status: Ready for one
+    // Add multiple adding
     /* FACILITY */
     /* Method to ADD a facility to a PARK */
-    public static void addFacilityForSpecificPark(Park park, Facility facility) {
+    public static void addFacilityForSpecificPark(Integer idPark, Facility facility) {
         Session session = sessionFactory.openSession();
         Transaction tx = null;
-        Integer parkID = null;
 
         try {
             tx = session.beginTransaction();
+
+            Park park = (Park) session.get(Park.class, idPark);
             park.setSingleFacility(facility);
-            parkID = (Integer) session.save(park);
+            session.update(park);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) {
@@ -62,7 +64,6 @@ public class DBMethods {
         } finally {
             session.close();
         }
-        //return facilityID;
     }
 
     // Status: Ready
@@ -426,6 +427,30 @@ public class DBMethods {
         }
         return managerID;
 
+    }
+
+    // Status: Testing
+    /* MANAGER */
+    /* Method to ADD a manager to a PARK */
+    public static void addManagerForSpecificPark(Integer idPark, Manager manager) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+
+            Park park = (Park) session.get(Park.class, idPark);
+            park.setManager(manager);
+            session.update(park);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
     // Status: Ready

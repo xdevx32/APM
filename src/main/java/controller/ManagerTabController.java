@@ -2,12 +2,15 @@ package controller;
 
 
 import entity.DBMethods;
+import entity.Facility;
 import entity.Manager;
+import entity.Park;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -31,6 +34,9 @@ public class ManagerTabController implements Initializable {
 
     @FXML
     private TableColumn managerSalaryColumn;
+
+    @FXML
+    private ComboBox<Park> selectParkComboBox;
 
     @FXML
     void deleteManagerData(ActionEvent event) {
@@ -72,6 +78,19 @@ public class ManagerTabController implements Initializable {
                 new PropertyValueFactory<>("salary"));
 
         managerTableView.setItems(managerData);
+
+        ObservableList<Park> parkData = FXCollections.observableArrayList(DBMethods.getParks());
+
+        selectParkComboBox.setItems(parkData);
+    }
+
+    @FXML
+    void addManagerToPark(ActionEvent event) {
+        Park selectedPark = selectParkComboBox.getValue();
+
+        Manager manager = managerTableView.getSelectionModel().getSelectedItem();
+
+        DBMethods.addManagerForSpecificPark(selectedPark.getIdPark(), manager);
     }
 }
 

@@ -38,7 +38,7 @@ public class Manager implements java.io.Serializable {
         return salary;
     }
 
-    @OneToOne
+    @OneToOne(mappedBy = "manager")
     public Park getPark() {
         return park;
     }
