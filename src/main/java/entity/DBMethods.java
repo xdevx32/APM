@@ -404,6 +404,30 @@ public class DBMethods {
         return null;
     }
 
+    // Status: ???
+    /* KID */
+    /* METHOD to add a KID visitor to the database */
+    public static void addKidVisitorToPark(Integer idPark, Kid kid) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+
+            Park park = (Park) session.get(Park.class, idPark);
+            park.setSingleKidVisitor(kid);
+            session.update(park);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
     // Status: Ready
     /* MANAGER */
     /* Method to CREATE a manager in the database */

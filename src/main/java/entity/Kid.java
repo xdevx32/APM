@@ -2,6 +2,9 @@ package entity;
 
 import javax.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -14,6 +17,7 @@ public class Kid implements java.io.Serializable {
 
     private Integer age;
 
+    private Set<Park> visitedParks = new HashSet<>();
 
     // Getters with annotations
 
@@ -28,6 +32,12 @@ public class Kid implements java.io.Serializable {
     public Integer getAge() {
         return age;
     }
+
+    @ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    public Set<Park> getVisitedParks() {
+        return visitedParks;
+    }
+
 
     // Constructors
 
@@ -45,6 +55,8 @@ public class Kid implements java.io.Serializable {
         this.age = age;
     }
 
+    // Setters
+
     public void setIdKid(Integer idKid) {
         this.idKid = idKid;
     }
@@ -52,6 +64,10 @@ public class Kid implements java.io.Serializable {
     public void setAge(Integer age) {
         this.idKid = idKid;
         this.age = age;
+    }
+
+    public void setVisitedParks(Set<Park> visitedParks) {
+        this.visitedParks = visitedParks;
     }
 
     //TODO

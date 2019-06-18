@@ -21,7 +21,7 @@ public class Park implements java.io.Serializable {
 
     private Set<Facility> facilities = new HashSet<>();
 
-
+    private Set<Kid> kidVisitors = new HashSet<>();
 
     // Getters with annotations
     @Id
@@ -53,6 +53,11 @@ public class Park implements java.io.Serializable {
         //return new HashSet<Facility>(this.facilities);
     }
 
+    @ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    public Set<Kid> getKidVisitors() {
+        return kidVisitors;
+    }
+
     // Setters
 
     public void setIdPark(Integer idPark) {
@@ -74,6 +79,10 @@ public class Park implements java.io.Serializable {
     public void setFacilities(Set<Facility> facilities) {
         this.facilities = facilities;
 
+    }
+
+    public void setKidVisitors(Set<Kid> kidVisitors) {
+        this.kidVisitors = kidVisitors;
     }
 
     // Constructors
@@ -108,6 +117,10 @@ public class Park implements java.io.Serializable {
 
     public void setSingleFacility(Facility facility) {
         this.facilities.add(facility);
+    }
+
+    public void setSingleKidVisitor(Kid kid) {
+        this.kidVisitors.add(kid);
     }
 
     //TODO
