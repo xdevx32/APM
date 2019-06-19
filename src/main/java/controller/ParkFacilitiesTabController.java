@@ -10,9 +10,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+import java.io.File;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 
 public class ParkFacilitiesTabController implements Initializable {
@@ -23,8 +28,15 @@ public class ParkFacilitiesTabController implements Initializable {
     @FXML
     private ListView<String> selectedParkFacilitiesListView;
 
+    @FXML
+    private ImageView apmLogo;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        File file = new File("src/main/resources/APM_Logo.jpg");
+        Image image = new Image(file.toURI().toString());
+        apmLogo.setImage(image);
 
         ObservableList<Park> parks = FXCollections.observableArrayList(DBMethods.getParks());
 
