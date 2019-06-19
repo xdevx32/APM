@@ -1,9 +1,8 @@
 package entity;
 
 import javax.persistence.*;
-
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -48,12 +47,10 @@ public class Park implements java.io.Serializable {
 
     @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     public Set<Facility> getFacilities() {
-        //TODO Check which is correct
         return facilities;
-        //return new HashSet<Facility>(this.facilities);
     }
 
-    @ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public Set<Kid> getKidVisitors() {
         return kidVisitors;
     }
@@ -85,6 +82,7 @@ public class Park implements java.io.Serializable {
         this.kidVisitors = kidVisitors;
     }
 
+
     // Constructors
 
     public Park() {
@@ -115,6 +113,10 @@ public class Park implements java.io.Serializable {
 
     // Additional
 
+    public void unsetManager() {
+        this.manager = null;
+    }
+
     public void setSingleFacility(Facility facility) {
         this.facilities.add(facility);
     }
@@ -123,11 +125,15 @@ public class Park implements java.io.Serializable {
         this.kidVisitors.add(kid);
     }
 
-    //TODO
+    public Double calculateTotalIncome() {
+        return this.getKidVisitors().size() * this.entryTicketPrice;
+    }
+
     @Override
     public String toString() {
-        //return "Park{" + "idPark=" + idPark + ", name=" + name + ", entryTicketPrice=" + entryTicketPrice +'}';
         return name;
+        //For testing purposes
+        //return "Име на парк: " + name + " с мениджър: " + this.getManager().getName() + ".";
     }
 
 

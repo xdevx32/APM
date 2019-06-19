@@ -1,7 +1,6 @@
 package entity;
 
 import javax.persistence.*;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -84,7 +83,6 @@ public class Facility implements java.io.Serializable {
         this.minAge = minAge;
     }
 
-    //TODO
     @Override
     public String toString() {
         return this.name;

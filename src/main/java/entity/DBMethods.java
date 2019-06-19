@@ -11,7 +11,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import java.util.*;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 public class DBMethods {
 
@@ -52,7 +56,7 @@ public class DBMethods {
         try {
             tx = session.beginTransaction();
 
-            Park park = (Park) session.get(Park.class, idPark);
+            Park park = session.get(Park.class, idPark);
             park.setSingleFacility(facility);
             session.update(park);
             tx.commit();
@@ -75,7 +79,7 @@ public class DBMethods {
 
         try {
             tx = session.beginTransaction();
-            Facility facility = (Facility) session.get(Facility.class, facilityID);
+            Facility facility = session.get(Facility.class, facilityID);
             tx.commit();
             return facility;
         } catch (HibernateException e) {
@@ -89,7 +93,7 @@ public class DBMethods {
         return null;
     }
 
-    // Status: Check if needed. If not - remove.
+    // Status: Consider removing
     /* FACILITY */
     /* Method to LIST all the facilities */
     public static void listFacilitiesForSelectedPark(Park park) {
@@ -129,7 +133,7 @@ public class DBMethods {
 
         try {
             tx = session.beginTransaction();
-            Facility facility = (Facility) session.get(Facility.class, idFacility);
+            Facility facility = session.get(Facility.class, idFacility);
             session.delete(facility);
             tx.commit();
         } catch (HibernateException e) {
@@ -251,7 +255,7 @@ public class DBMethods {
 
         try {
             tx = session.beginTransaction();
-            Park park = (Park) session.get(Park.class, parkID);
+            Park park = session.get(Park.class, parkID);
             tx.commit();
             return park;
         } catch (HibernateException e) {
@@ -274,7 +278,7 @@ public class DBMethods {
 
         try {
             tx = session.beginTransaction();
-            Park park = (Park) session.get(Park.class, idPark);
+            Park park = session.get(Park.class, idPark);
             session.delete(park);
             tx.commit();
         } catch (HibernateException e) {
@@ -344,7 +348,7 @@ public class DBMethods {
 
         try {
             tx = session.beginTransaction();
-            Kid kid = (Kid) session.get(Kid.class, kidID);
+            Kid kid = session.get(Kid.class, kidID);
             tx.commit();
             return kid;
         } catch (HibernateException e) {
@@ -367,7 +371,7 @@ public class DBMethods {
 
         try {
             tx = session.beginTransaction();
-            Kid kid = (Kid) session.get(Kid.class, idKid);
+            Kid kid = session.get(Kid.class, idKid);
             session.delete(kid);
             tx.commit();
         } catch (HibernateException e) {
@@ -404,7 +408,7 @@ public class DBMethods {
         return null;
     }
 
-    // Status: ???
+    // Status: Ready
     /* KID */
     /* METHOD to add a KID visitor to the database */
     public static void addKidVisitorToPark(Integer idPark, Kid kid) {
@@ -413,8 +417,7 @@ public class DBMethods {
 
         try {
             tx = session.beginTransaction();
-
-            Park park = (Park) session.get(Park.class, idPark);
+            Park park = session.get(Park.class, idPark);
             park.setSingleKidVisitor(kid);
             session.update(park);
             tx.commit();
@@ -453,7 +456,7 @@ public class DBMethods {
 
     }
 
-    // Status: Testing
+    // Status: Ready
     /* MANAGER */
     /* Method to ADD a manager to a PARK */
     public static void addManagerForSpecificPark(Integer idPark, Manager manager) {
@@ -463,7 +466,7 @@ public class DBMethods {
         try {
             tx = session.beginTransaction();
 
-            Park park = (Park) session.get(Park.class, idPark);
+            Park park = session.get(Park.class, idPark);
             park.setManager(manager);
             session.update(park);
             tx.commit();
@@ -486,7 +489,7 @@ public class DBMethods {
 
         try {
             tx = session.beginTransaction();
-            Manager manager = (Manager) session.get(Manager.class, managerId);
+            Manager manager = session.get(Manager.class, managerId);
             tx.commit();
             return manager;
         } catch (HibernateException e) {
@@ -525,7 +528,7 @@ public class DBMethods {
         return null;
     }
 
-    // Status: To be removed
+    // Status: Consider removing
     /* MANAGER */
     /* Method to LIST all the managers */
     public static void listManagers() {
@@ -550,8 +553,51 @@ public class DBMethods {
         }
     }
 
-    // Status: //TODO
+    // Status: Ready
+    /* MANAGER */
+    public static void updateManagerSalary(Integer idManager, Double newSalary) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+
+            Manager manager = session.get(Manager.class, idManager);
+            manager.setSalary(newSalary);
+            manager.setHasPromotion(true);
+            session.update(manager);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    // Status: Ready
     /* MANAGER */
     public static void deleteManager(Integer idManager) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            Manager manager = session.get(Manager.class, idManager);
+            Park park = manager.getPark();
+            park.unsetManager();
+            session.update(park);
+            session.delete(manager);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 }

@@ -1,7 +1,6 @@
 package entity;
 
 import javax.persistence.*;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +22,7 @@ public class Kid implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "idKid", unique = true, nullable = false)
+    @Column(name = "idKid", unique = false, nullable = false)
     public Integer getIdKid() {
         return idKid;
     }
@@ -33,11 +32,10 @@ public class Kid implements java.io.Serializable {
         return age;
     }
 
-    @ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public Set<Park> getVisitedParks() {
         return visitedParks;
     }
-
 
     // Constructors
 
@@ -70,9 +68,8 @@ public class Kid implements java.io.Serializable {
         this.visitedParks = visitedParks;
     }
 
-    //TODO
     @Override
     public String toString() {
-        return "Kid";
+        return "Kid: " + this.idKid;
     }
 }

@@ -8,10 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
@@ -52,8 +49,11 @@ public class FacilityTabController implements Initializable {
             facilityNameTextField.clear();
             facilityMinAgeTextField.clear();
         } else {
-            // TODO
-            System.out.println("Error message for not entering data");
+            Alert a = new Alert(Alert.AlertType.WARNING);
+
+            a.setAlertType(Alert.AlertType.WARNING);
+            a.setHeaderText("Неправилно въведени данни!");
+            a.show();
         }
     }
 
@@ -93,4 +93,13 @@ public class FacilityTabController implements Initializable {
         selectParkComboBox.setItems(parkData);
     }
 
+    @FXML
+    void refreshDataAction(ActionEvent event) {
+
+        ObservableList<Park> parks = FXCollections.observableArrayList(DBMethods.getParks());
+
+        selectParkComboBox.getItems().clear();
+
+        selectParkComboBox.getItems().addAll(parks);
+    }
 }

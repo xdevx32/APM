@@ -1,15 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.FlowPane?>
-
-
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReportTabController">
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="345.0" prefWidth="441.0"
+            xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controller.ReportTabController">
    <children>
       <FlowPane prefHeight="345.0" prefWidth="700.0">
          <children>
-            <Button mnemonicParsing="false" text="reports" />
+             <GridPane prefHeight="345.0" prefWidth="700.0"
+                       style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;">
+                 <columnConstraints>
+                     <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                 </columnConstraints>
+                 <rowConstraints>
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                 </rowConstraints>
+                 <children>
+                     <Pane prefHeight="200.0" prefWidth="200.0"
+                           style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;">
+                         <children>
+                             <Label alignment="CENTER_RIGHT" prefHeight="113.0" prefWidth="353.0"
+                                    text="Общ приход от билети за всички паркове">
+                                 <padding>
+                                     <Insets left="1.0" right="7.0"/>
+                                 </padding>
+                             </Label>
+                         </children>
+                     </Pane>
+                     <Pane prefHeight="200.0" prefWidth="200.0"
+                           style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;"
+                           GridPane.rowIndex="1">
+                         <children>
+                             <Label alignment="CENTER_RIGHT" prefHeight="113.0" prefWidth="347.0"
+                                    text="Средна възраст на децата посетили всички паркове">
+                                 <padding>
+                                     <Insets left="1.0" right="7.0"/>
+                                 </padding>
+                             </Label>
+                         </children>
+                     </Pane>
+                     <Pane prefHeight="200.0" prefWidth="200.0"
+                           style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;"
+                           GridPane.rowIndex="2">
+                         <children>
+                             <Label alignment="CENTER_RIGHT" prefHeight="113.0" prefWidth="338.0" text="Обнови данни">
+                                 <padding>
+                                     <Insets left="1.0" right="7.0"/>
+                                 </padding>
+                             </Label>
+                         </children>
+                     </Pane>
+                     <Pane prefHeight="200.0" prefWidth="200.0"
+                           style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;"
+                           GridPane.columnIndex="1">
+                         <children>
+                             <Label fx:id="totalIncomeForParks" layoutX="9.0" prefHeight="113.0" prefWidth="115.0"
+                                    text="0.0" textAlignment="CENTER">
+                                 <font>
+                                     <Font size="24.0"/>
+                                 </font>
+                             </Label>
+                         </children>
+                     </Pane>
+                     <Pane prefHeight="200.0" prefWidth="200.0"
+                           style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;"
+                           GridPane.columnIndex="1" GridPane.rowIndex="1">
+                         <children>
+                             <Label fx:id="avgAgeLabel" layoutX="9.0" prefHeight="113.0" prefWidth="100.0" text="0">
+                                 <font>
+                                     <Font size="24.0"/>
+                                 </font>
+                             </Label>
+                         </children>
+                     </Pane>
+                     <Pane prefHeight="200.0" prefWidth="200.0"
+                           style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;"
+                           GridPane.columnIndex="1" GridPane.rowIndex="2">
+                         <children>
+                             <Button layoutX="14.0" layoutY="37.0" mnemonicParsing="false" onAction="#refreshData"
+                                     prefHeight="39.0" prefWidth="100.0" text="Обнови"/>
+                         </children>
+                     </Pane>
+                 </children>
+             </GridPane>
          </children>
       </FlowPane>
    </children>

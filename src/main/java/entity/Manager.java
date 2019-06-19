@@ -1,11 +1,14 @@
 package entity;
 
 import javax.persistence.*;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "manager")
 public class Manager implements java.io.Serializable {
+
+    public Boolean hasPromotion = false;
 
     // Properties
 
@@ -38,6 +41,11 @@ public class Manager implements java.io.Serializable {
         return salary;
     }
 
+    @Column(name = "hasPromotion")
+    public Boolean getHasPromotion() {
+        return hasPromotion;
+    }
+
     @OneToOne(mappedBy = "manager")
     public Park getPark() {
         return park;
@@ -61,6 +69,10 @@ public class Manager implements java.io.Serializable {
         this.park = park;
     }
 
+    public void setHasPromotion(Boolean hasPromotion) {
+        this.hasPromotion = hasPromotion;
+    }
+
     // Constructors
 
     Manager() {
@@ -80,7 +92,6 @@ public class Manager implements java.io.Serializable {
         this.salary = salary;
     }
 
-    //TODO
     @Override
     public String toString() {
         return name;

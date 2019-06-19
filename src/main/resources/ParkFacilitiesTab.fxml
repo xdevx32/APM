@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
 <AnchorPane prefHeight="575.0" prefWidth="398.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ParkFacilitiesTabController">
    <children>
       <BorderPane layoutY="3.0" prefHeight="569.0" prefWidth="700.0">
@@ -31,13 +21,12 @@
          </center>
          <bottom>
             <ListView fx:id="selectedParkFacilitiesListView" prefHeight="195.0" prefWidth="700.0" BorderPane.alignment="CENTER">
-               <String fx:value="Съоражение 1" />
-               <String fx:value="Съоражение 2" />
-               <String fx:value="Съоражение 3" />
+                <String fx:value="Изберете парк, за видите съораженията в него."/>
             </ListView>
          </bottom>
          <top>
-            <Button fx:id="refreshData" mnemonicParsing="false" onAction="#refreshDataAction" prefHeight="30.0" prefWidth="176.0" text="Презареди" BorderPane.alignment="CENTER" />
+             <Button fx:id="refreshData" mnemonicParsing="false" onAction="#refreshDataAction" prefHeight="30.0"
+                     prefWidth="176.0" text="Обнови данни" BorderPane.alignment="CENTER"/>
          </top>
       </BorderPane>
       <FlowPane layoutX="18.0" layoutY="570.0" prefHeight="44.0" prefWidth="633.0">
