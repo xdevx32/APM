@@ -18,7 +18,7 @@ public class Facility implements java.io.Serializable {
 
     private Integer minAge;
 
-    private Set<Park> parks = new HashSet<>();
+    private Set<Park> parks = new HashSet<Park>(0);
 
 
     // Getters with annotations
@@ -40,7 +40,7 @@ public class Facility implements java.io.Serializable {
         return minAge;
     }
 
-    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @Transient
     public Set<Park> getParks() {
         return parks;
     }

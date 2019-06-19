@@ -32,7 +32,7 @@ public class Kid implements java.io.Serializable {
         return age;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Transient
     public Set<Park> getVisitedParks() {
         return visitedParks;
     }

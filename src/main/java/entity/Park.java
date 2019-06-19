@@ -18,7 +18,7 @@ public class Park implements java.io.Serializable {
 
     private Manager manager;
 
-    private Set<Facility> facilities = new HashSet<>();
+    private Set<Facility> facilities = new HashSet<Facility>(0);
 
     private Set<Kid> kidVisitors = new HashSet<>();
 
@@ -45,12 +45,14 @@ public class Park implements java.io.Serializable {
         return manager;
     }
 
-    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "park_facility", joinColumns = {@JoinColumn(name = "idPark")}, inverseJoinColumns = {@JoinColumn(name = "idFacility")})
     public Set<Facility> getFacilities() {
         return facilities;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "park_kid", joinColumns = {@JoinColumn(name = "idPark")}, inverseJoinColumns = {@JoinColumn(name = "idKid")})
     public Set<Kid> getKidVisitors() {
         return kidVisitors;
     }
