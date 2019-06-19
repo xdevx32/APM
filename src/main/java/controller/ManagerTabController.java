@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import utility.AlertErrorUtility;
 import utility.ManagerRaiseCalculator;
 
 import java.net.URL;
@@ -60,11 +61,7 @@ public class ManagerTabController implements Initializable {
             managerNameTextField.clear();
             managerSalaryTextField.clear();
         } else {
-            Alert a = new Alert(Alert.AlertType.WARNING);
-
-            a.setAlertType(Alert.AlertType.WARNING);
-            a.setHeaderText("Неправилно въведени данни!");
-            a.show();
+            AlertErrorUtility.showCustomAlert("Неправилно въведени данни!");
         }
     }
 

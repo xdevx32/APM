@@ -11,6 +11,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import utility.AlertErrorUtility;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -64,6 +65,7 @@ public class DBMethods {
             if (tx != null) {
                 tx.rollback();
             }
+            AlertErrorUtility.showCustomAlert("Съоражението вече съществува в парка.");
             e.printStackTrace();
         } finally {
             session.close();
