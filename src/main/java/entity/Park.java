@@ -20,7 +20,7 @@ public class Park implements java.io.Serializable {
 
     private Set<Facility> facilities = new HashSet<Facility>(0);
 
-    private Set<Kid> kidVisitors = new HashSet<>();
+    private Set<Kid> kidVisitors = new HashSet<Kid>(0);
 
     // Getters with annotations
     @Id
