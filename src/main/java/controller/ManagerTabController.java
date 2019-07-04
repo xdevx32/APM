@@ -3,6 +3,7 @@ package controller;
 
 import entity.DBMethods;
 import entity.Manager;
+import entity.Model;
 import entity.Park;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +19,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ManagerTabController implements Initializable {
+
+    private Model model = Model.getInstance();
 
     @FXML
     private TextField managerNameTextField;
@@ -88,7 +91,7 @@ public class ManagerTabController implements Initializable {
 
         managerTableView.setItems(managerData);
 
-        ObservableList<Park> parkData = FXCollections.observableArrayList(DBMethods.getParks());
+        ObservableList<Park> parkData = model.getParksObservableList();
 
         selectParkComboBox.setItems(parkData);
     }
@@ -104,7 +107,7 @@ public class ManagerTabController implements Initializable {
 
     @FXML
     void refreshDataAction(ActionEvent event) {
-        managerTableView.refresh();
+
         ObservableList<Manager> managerData = FXCollections.observableArrayList(DBMethods.getManagers());
 
         for (Manager manager : managerData) {
@@ -120,22 +123,6 @@ public class ManagerTabController implements Initializable {
             }
         }
 
-        //Refreshing actually means getting the values again :)
-        managerData = FXCollections.observableArrayList(DBMethods.getManagers());
-
-        managerNameColumn.setCellValueFactory(
-                new PropertyValueFactory<>("name"));
-        managerSalaryColumn.setCellValueFactory(
-                new PropertyValueFactory<>("salary"));
-
-        managerTableView.setItems(managerData);
-
-
-        ObservableList<Park> parks = FXCollections.observableArrayList(DBMethods.getParks());
-
-        selectParkComboBox.getItems().clear();
-
-        selectParkComboBox.getItems().addAll(parks);
     }
 }
 

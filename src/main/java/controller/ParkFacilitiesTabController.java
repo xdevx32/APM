@@ -2,8 +2,8 @@ package controller;
 
 import entity.DBMethods;
 import entity.Facility;
+import entity.Model;
 import entity.Park;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +22,8 @@ import java.util.ResourceBundle;
 
 public class ParkFacilitiesTabController implements Initializable {
 
+    private Model model = Model.getInstance();
+
     @FXML
     private ComboBox<Park> parkComboBox;
 
@@ -34,15 +36,13 @@ public class ParkFacilitiesTabController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        final ObservableList<Park> parkData = FXCollections.observableArrayList(DBMethods.getParks());
+        ObservableList<Park> parkData = model.getParksObservableList();
 
         File file = new File("src/main/resources/APM_Logo.jpg");
         Image image = new Image(file.toURI().toString());
         apmLogo.setImage(image);
 
-        parkComboBox.getItems().clear();
-
-        parkComboBox.getItems().addAll(parkData);
+        parkComboBox.setItems(parkData);
     }
 
     public void displayFacilitiesForSelectedPark(ActionEvent actionEvent) {
@@ -61,14 +61,5 @@ public class ParkFacilitiesTabController implements Initializable {
         selectedParkFacilitiesListView.getItems().addAll(facilityNames);
     }
 
-    @FXML
-    void refreshDataAction(ActionEvent event) {
-
-        final ObservableList<Park> parkData = FXCollections.observableArrayList(DBMethods.getParks());
-
-        parkComboBox.getItems().clear();
-
-        parkComboBox.getItems().addAll(parkData);
-    }
 }
 

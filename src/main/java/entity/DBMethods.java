@@ -13,10 +13,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import utility.AlertErrorUtility;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class DBMethods {
 
@@ -296,16 +293,15 @@ public class DBMethods {
     // Status: Ready
     /* PARK */
     /* Method to RETURN all parks */
-    public static ObservableList<Park> getParks() {
+    public static ArrayList<Park> getParks() {
         Session session = sessionFactory.openSession();
         Transaction tx = null;
 
         try {
             tx = session.beginTransaction();
-            List parks = session.createQuery("FROM " + Park.class.getSimpleName()).list();
-            ObservableList<Park> parkObservableList = FXCollections.observableArrayList(parks);
+            List<Park> parks = session.createQuery("FROM " + Park.class.getSimpleName()).list();
             tx.commit();
-            return parkObservableList;
+            return new ArrayList<Park>(parks);
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();

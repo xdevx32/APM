@@ -2,6 +2,7 @@ package controller;
 
 import entity.DBMethods;
 import entity.Facility;
+import entity.Model;
 import entity.Park;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +20,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class FacilityTabController implements Initializable {
+
+    private Model model = Model.getInstance();
 
     @FXML
     private TextField facilityNameTextField;
@@ -88,18 +91,8 @@ public class FacilityTabController implements Initializable {
 
         facilityTableView.setItems(facilityData);
 
-        ObservableList<Park> parkData = FXCollections.observableArrayList(DBMethods.getParks());
+        ObservableList<Park> parkData = model.getParksObservableList();
 
         selectParkComboBox.setItems(parkData);
-    }
-
-    @FXML
-    void refreshDataAction(ActionEvent event) {
-
-        ObservableList<Park> parks = FXCollections.observableArrayList(DBMethods.getParks());
-
-        selectParkComboBox.getItems().clear();
-
-        selectParkComboBox.getItems().addAll(parks);
     }
 }

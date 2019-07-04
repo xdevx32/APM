@@ -23,6 +23,7 @@ public class Park implements java.io.Serializable {
     private Set<Kid> kidVisitors = new HashSet<Kid>(0);
 
     // Getters with annotations
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "idPark", unique = true, nullable = false)

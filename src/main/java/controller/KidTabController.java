@@ -91,12 +91,4 @@ public class KidTabController implements Initializable {
         DBMethods.addKidVisitorToPark(selectedPark.getIdPark(), selectedKid);
     }
 
-    @FXML
-    void refreshDataAction(ActionEvent event) {
-        ObservableList<Park> parks = FXCollections.observableArrayList(DBMethods.getParks());
-
-        selectParkComboBox.getItems().clear();
-
-        selectParkComboBox.getItems().addAll(parks);
-    }
 }

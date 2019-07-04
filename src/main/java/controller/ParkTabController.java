@@ -1,8 +1,8 @@
 package controller;
 
 import entity.DBMethods;
+import entity.Model;
 import entity.Park;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +18,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ParkTabController implements Initializable {
+
+    private Model model = Model.getInstance();
 
     @FXML
     private AnchorPane parksTab;
@@ -39,7 +41,7 @@ public class ParkTabController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        final ObservableList<Park> parkData = FXCollections.observableArrayList(DBMethods.getParks());
+        ObservableList<Park> parkData = model.getParksObservableList();
 
         parkNameColumn.setCellValueFactory(
                 new PropertyValueFactory<>("name"));
@@ -47,7 +49,6 @@ public class ParkTabController implements Initializable {
                 new PropertyValueFactory<>("entryTicketPrice"));
 
         parkTableView.setItems(parkData);
-
     }
 
     @FXML
@@ -59,6 +60,8 @@ public class ParkTabController implements Initializable {
 
             Integer parkId = DBMethods.addPark(parkName, entryTicketPrice);
             Park parkObject = DBMethods.getPark(parkId);
+
+            model.addParkToArrayList(parkObject);
 
             parkTableView.getItems().add(parkObject);
             parkNameTextField.clear();
@@ -72,9 +75,10 @@ public class ParkTabController implements Initializable {
     void deleteParkData(ActionEvent event) {
         Park selectedObject = parkTableView.getSelectionModel().getSelectedItem();
         if (selectedObject != null) {
-            System.out.println(selectedObject.getIdPark());
             parkTableView.getItems().removeAll(selectedObject);
             DBMethods.deletePark(selectedObject.getIdPark());
+
+            model.removeParkFromArrayList(selectedObject);
         }
     }
 }
