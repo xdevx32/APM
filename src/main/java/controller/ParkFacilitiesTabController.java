@@ -34,15 +34,15 @@ public class ParkFacilitiesTabController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        final ObservableList<Park> parkData = FXCollections.observableArrayList(DBMethods.getParks());
+
         File file = new File("src/main/resources/APM_Logo.jpg");
         Image image = new Image(file.toURI().toString());
         apmLogo.setImage(image);
 
-        ObservableList<Park> parks = FXCollections.observableArrayList(DBMethods.getParks());
-
         parkComboBox.getItems().clear();
 
-        parkComboBox.getItems().addAll(parks);
+        parkComboBox.getItems().addAll(parkData);
     }
 
     public void displayFacilitiesForSelectedPark(ActionEvent actionEvent) {
@@ -64,11 +64,11 @@ public class ParkFacilitiesTabController implements Initializable {
     @FXML
     void refreshDataAction(ActionEvent event) {
 
-        ObservableList<Park> parks = FXCollections.observableArrayList(DBMethods.getParks());
+        final ObservableList<Park> parkData = FXCollections.observableArrayList(DBMethods.getParks());
 
         parkComboBox.getItems().clear();
 
-        parkComboBox.getItems().addAll(parks);
+        parkComboBox.getItems().addAll(parkData);
     }
 }
 

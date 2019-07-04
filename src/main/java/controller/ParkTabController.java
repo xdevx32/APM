@@ -26,18 +26,16 @@ public class ParkTabController implements Initializable {
     private TableView<Park> parkTableView;
 
     @FXML
-    private TableColumn parkNameColumn;
+    private TableColumn<Object, Object> parkNameColumn;
 
     @FXML
-    private TableColumn entryTicketPriceColumn;
+    private TableColumn<Object, Object> entryTicketPriceColumn;
 
     @FXML
     private TextField parkNameTextField;
 
     @FXML
     private TextField entryTicketPriceTextField;
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
