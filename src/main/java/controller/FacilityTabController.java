@@ -2,7 +2,7 @@ package controller;
 
 import entity.DBMethods;
 import entity.Facility;
-import entity.Model;
+import entity.ObservableListHolder;
 import entity.Park;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 
 public class FacilityTabController implements Initializable {
 
-    private Model model = Model.getInstance();
+    private ObservableListHolder observableListHolder = ObservableListHolder.getInstance();
 
     @FXML
     private TextField facilityNameTextField;
@@ -91,7 +91,7 @@ public class FacilityTabController implements Initializable {
 
         facilityTableView.setItems(facilityData);
 
-        ObservableList<Park> parkData = model.getParksObservableList();
+        ObservableList<Park> parkData = observableListHolder.getParksObservableList();
 
         selectParkComboBox.setItems(parkData);
     }

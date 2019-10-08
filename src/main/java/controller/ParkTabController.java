@@ -1,7 +1,7 @@
 package controller;
 
 import entity.DBMethods;
-import entity.Model;
+import entity.ObservableListHolder;
 import entity.Park;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 
 public class ParkTabController implements Initializable {
 
-    private Model model = Model.getInstance();
+    private ObservableListHolder observableListHolder = ObservableListHolder.getInstance();
 
     @FXML
     private AnchorPane parksTab;
@@ -41,7 +41,7 @@ public class ParkTabController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<Park> parkData = model.getParksObservableList();
+        ObservableList<Park> parkData = observableListHolder.getParksObservableList();
 
         parkNameColumn.setCellValueFactory(
                 new PropertyValueFactory<>("name"));
@@ -61,7 +61,7 @@ public class ParkTabController implements Initializable {
             Integer parkId = DBMethods.addPark(parkName, entryTicketPrice);
             Park parkObject = DBMethods.getPark(parkId);
 
-            model.addParkToArrayList(parkObject);
+            observableListHolder.addParkToArrayList(parkObject);
 
             parkTableView.getItems().add(parkObject);
             parkNameTextField.clear();
@@ -78,7 +78,7 @@ public class ParkTabController implements Initializable {
             parkTableView.getItems().removeAll(selectedObject);
             DBMethods.deletePark(selectedObject.getIdPark());
 
-            model.removeParkFromArrayList(selectedObject);
+            observableListHolder.removeParkFromArrayList(selectedObject);
         }
     }
 }

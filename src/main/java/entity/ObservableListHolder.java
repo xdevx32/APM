@@ -7,23 +7,23 @@ import java.util.ArrayList;
 import java.util.List;
 /*
 *
-*  Singleton class for keeping one instance of the Model
+*  A class for keeping observable lists and accessing them easily.
 *
  */
-public class Model {
+public class ObservableListHolder {
 
     private ObservableList<Park> parksObservableList = FXCollections.observableArrayList();
 
     private List<Park> parksList = DBMethods.getParks();
 
-    // static variable single_instance of type Model
-    private static Model single_instance = null;
+    // static variable single_instance of type ObservableListHolder
+    private static ObservableListHolder single_instance = null;
 
     // static method to create instance of Singleton class
-    public static Model getInstance()
+    public static ObservableListHolder getInstance()
     {
         if (single_instance == null)
-            single_instance = new Model();
+            single_instance = new ObservableListHolder();
 
         return single_instance;
     }
@@ -36,7 +36,7 @@ public class Model {
         parksObservableList.setAll(parksList);
     }
 
-    public Model() {
+    public ObservableListHolder() {
         parksObservableList.setAll(DBMethods.getParks());
     }
 

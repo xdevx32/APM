@@ -2,7 +2,7 @@ package controller;
 
 import entity.DBMethods;
 import entity.Facility;
-import entity.Model;
+import entity.ObservableListHolder;
 import entity.Park;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 public class ParkFacilitiesTabController implements Initializable {
 
-    private Model model = Model.getInstance();
+    private ObservableListHolder observableListHolder = ObservableListHolder.getInstance();
 
     @FXML
     private ComboBox<Park> parkComboBox;
@@ -36,7 +36,7 @@ public class ParkFacilitiesTabController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        ObservableList<Park> parkData = model.getParksObservableList();
+        ObservableList<Park> parkData = observableListHolder.getParksObservableList();
 
         File file = new File("src/main/resources/APM_Logo.jpg");
         Image image = new Image(file.toURI().toString());
